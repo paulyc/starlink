@@ -12,7 +12,7 @@
 	url = ../skycat.git
 [submodule "thirdparty/perlsys/perl/perl"]
 	path = thirdparty/perlsys/perl/perl
-	url = git://github.com/Perl/perl5.git
+	url = git://github.com/paulyc/perl5.git
 [submodule "applications/smurf/libacsis/specwrite"]
 	path = applications/smurf/libacsis/specwrite
 	url = git://github.com/eaobservatory/acsis-libspecwrite.git
