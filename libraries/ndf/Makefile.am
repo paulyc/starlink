@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
 dist_bin_SCRIPTS = ndf_link ndf_link_adam
-cincludedir = $(includedir)/star
+cincludedir = $(includedir)/star ../../applications/generic
 dist_noinst_SCRIPTS = make_h pygrep
 
 lib_LTLIBRARIES = libndf.la libndf_adam.la
@@ -110,7 +110,7 @@ ndfSsary.c ndfState.c ndfStype.c ndfTemp.c ndfTrace.c ndfTune.c ndfType.c \
 ndfUnmap.c ndfValid.c ndfXdel.c ndfXgt0c.c ndfXiary.c \
 ndfXloc.c ndfXname.c ndfXnew.c ndfXnumb.c ndfXpt0c.c ndfXpt0l.c \
 ndfXstat.c ndfZdelt.c ndfZscal.c ndf1IsValid.c ndf1Mjd2t.c ndf1Cuserid.c \
-fortran_interface.c v1_interface.c ndfXgt0l.c ndf1CheckLocker.c \
+fortran_interface.c v1_interface.c ndfXgt0l.c ndfXgt0D.c ndf1CheckLocker.c \
 ndf1LockDCB.c ndf1UnlockDCB.c ndf1LockACB.c ndf1UnlockACB.c \
 ndfLock.c ndfUnlock.c ndf1Locked.c ndfLocked.c ndfReport.c \
 ndf1UnlockLoc.c ndf1LockLoc.c ndf1UnlockAry.c ndf1LockAry.c

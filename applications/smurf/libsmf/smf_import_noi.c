@@ -205,7 +205,7 @@ int smf_import_noi( const char *name, smfDIMMHead *head, AstKeyMap *keymap,
 
 /* Get the number of times to repeat each noise value in the NDF. This is
    stored in the SMURF extension of the supplied NDF. */
-      ndfXgt0i( indf, "SMURF", "NOI_BOXSIZE", &repeat, status );
+      ndfXgt0l( indf, "SMURF", "NOI_BOXSIZE", &repeat, status );
 
 /* Check we can use the pointers safely. */
       if( *status == SAI__OK ) {

@@ -180,7 +180,7 @@ void smf_export_noi( smfData *noi, const char *name, int boxsize, int *status ){
 
 /* Store the box size as an extension item in the NDF. */
       ndfXnew( indf, SMURF__EXTNAME, SMURF__EXTTYPE, 0, NULL, &xloc, status );
-      ndfXpt0i( boxsize, indf, SMURF__EXTNAME, "NOI_BOXSIZE", status );
+      ndfXpt0l( boxsize, indf, SMURF__EXTNAME, "NOI_BOXSIZE", status );
       datAnnul( &xloc, status );
    }
 

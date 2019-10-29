@@ -463,9 +463,9 @@ void smf_write_smfData ( ThrWorkForce *wf, const smfData *data, const smfData *v
       ndfXstat( outfile->ndfid, SMURF__EXTNAME, &there, status );
       if( !there ) ndfXnew( outfile->ndfid, SMURF__EXTNAME, SMURF__EXTTYPE,
                             0, NULL, &xloc, status );
-      ndfXpt0d( inhdr->steptime, outfile->ndfid, SMURF__EXTNAME,
+      ndfXpt0l( inhdr->steptime, outfile->ndfid, SMURF__EXTNAME,
                 "STEPTIME", status );
-      ndfXpt0d( inhdr->scanvel, outfile->ndfid, SMURF__EXTNAME,
+      ndfXpt0l( inhdr->scanvel, outfile->ndfid, SMURF__EXTNAME,
                 "SCAN_VEL", status );
       datAnnul( &xloc, status );
     }

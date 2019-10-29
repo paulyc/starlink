@@ -1,3 +1,4 @@
+
 /*
 *+
 *  Name:
@@ -263,7 +264,7 @@ smfDream *smf_construct_smfDream( smfData *data, size_t nvert,
 		}
 		/* And finally, read the size of the grid step */
 		wtfile = wtdata->file;
-		ndfXgt0d( wtfile->ndfid, "DREAM", "GRID_SIZE", &dream->gridstep,
+		ndfXgt0D_( wtfile->ndfid, "DREAM", "GRID_SIZE", &dream->gridstep,
 			  status );
 		/* Annul locator, close file */
 		datAnnul( &drmloc, status );

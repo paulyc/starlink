@@ -257,7 +257,7 @@ void smf_polext( int ondf, int store_angle, double angle, const char *domain,
 /* If required, ctore the angle from the reference direction (north) to the
    effective analyser axis, measured positive in the same sense as rotation
    from the first to the second pixel axis. */
-      if( store_angle ) ndfXpt0r( angle*AST__DR2D, ondf, "POLPACK", "ANLANG",
+      if( store_angle ) ndfXpt0l( angle*AST__DR2D, ondf, "POLPACK", "ANLANG",
                                   status );
 
 /* Annul the extension locator.  */

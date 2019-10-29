@@ -1910,7 +1910,7 @@ void smurf_makemap( int *status ) {
        iterations were completed. This is only useful if the data was
        processed in a single chunk. */
     if( iters != -1 && ncontchunks == 1 ) {
-       ndfXpt0i( iters, ondf, SMURF__EXTNAME, "NUMITER", status );
+       ndfXpt0l( iters, ondf, SMURF__EXTNAME, "NUMITER", status );
     }
 
     /* Set bad bits mask to enable QUALITY. We can have quality bits set

@@ -222,7 +222,7 @@ int smf_initial_sky( ThrWorkForce *wf, AstKeyMap *keymap, smfDIMMData *dat,
          double *tptr;
          int tndf;
          HDSLoc *xloc = NULL;
-         ndfXgt0i( indf1, SMURF__EXTNAME, "NUMITER", iters, status );
+         ndfXgt0l( indf1, SMURF__EXTNAME, "NUMITER", iters, status );
 
 /* Get a locator for the SMURF extension. */
          ndfXloc( indf1, SMURF__EXTNAME, "READ", &xloc, status );

@@ -1,0 +1,117 @@
+diff --git a/applications/smurf/libsmf/smf_construct_smfDream.c b/applications/smurf/libsmf/smf_construct_smfDream.c
+index 53f2128c3e..49fe444ec5 100644
+--- a/applications/smurf/libsmf/smf_construct_smfDream.c
++++ b/applications/smurf/libsmf/smf_construct_smfDream.c
+@@ -1,3 +1,4 @@
++
+ /*
+ *+
+ *  Name:
+@@ -263,7 +264,7 @@ smfDream *smf_construct_smfDream( smfData *data, size_t nvert,
+ 		}
+ 		/* And finally, read the size of the grid step */
+ 		wtfile = wtdata->file;
+-		ndfXgt0d( wtfile->ndfid, "DREAM", "GRID_SIZE", &dream->gridstep,
++		ndfXgt0D_( wtfile->ndfid, "DREAM", "GRID_SIZE", &dream->gridstep,
+ 			  status );
+ 		/* Annul locator, close file */
+ 		datAnnul( &drmloc, status );
+diff --git a/applications/smurf/libsmf/smf_dreamsolve.c b/applications/smurf/libsmf/smf_dreamsolve.c
+index a779054364..c659d98e97 100644
+--- a/applications/smurf/libsmf/smf_dreamsolve.c
++++ b/applications/smurf/libsmf/smf_dreamsolve.c
+@@ -1,3 +1,4 @@
++
+ /*
+  *+
+  *  Name:
+@@ -228,7 +229,7 @@ void smf_dreamsolve( smfData *data, int *status ) {
+ 
+     /* Write grid size into output file - PROTECT FROM NON-NULL!! */
+     ofile = data->file;
+-    ndfXpt0d( dream->gridstep, ofile->ndfid, "DREAM", "GRID_SIZE", status);
++    ndfXpt0l_( dream->gridstep, ofile->ndfid, "DREAM", "GRID_SIZE", status);
+ 
+     /* Create SCU2RED extension to hold reconstructed images */
+     scu2redloc = smf_get_xloc(data, "SCU2RED", "SCUBA2_MAP_ARR", "WRITE",
+diff --git a/applications/smurf/libsmf/smf_export_noi.c b/applications/smurf/libsmf/smf_export_noi.c
+index 74a2d3b508..23e523d878 100644
+--- a/applications/smurf/libsmf/smf_export_noi.c
++++ b/applications/smurf/libsmf/smf_export_noi.c
+@@ -180,7 +180,7 @@ void smf_export_noi( smfData *noi, const char *name, int boxsize, int *status ){
+ 
+ /* Store the box size as an extension item in the NDF. */
+       ndfXnew( indf, SMURF__EXTNAME, SMURF__EXTTYPE, 0, NULL, &xloc, status );
+-      ndfXpt0i( boxsize, indf, SMURF__EXTNAME, "NOI_BOXSIZE", status );
++      ndfXpt0l( boxsize, indf, SMURF__EXTNAME, "NOI_BOXSIZE", status );
+       datAnnul( &xloc, status );
+    }
+ 
+diff --git a/applications/smurf/libsmf/smf_import_noi.c b/applications/smurf/libsmf/smf_import_noi.c
+index 401b9ce924..83815a39ad 100644
+--- a/applications/smurf/libsmf/smf_import_noi.c
++++ b/applications/smurf/libsmf/smf_import_noi.c
+@@ -205,7 +205,7 @@ int smf_import_noi( const char *name, smfDIMMHead *head, AstKeyMap *keymap,
+ 
+ /* Get the number of times to repeat each noise value in the NDF. This is
+    stored in the SMURF extension of the supplied NDF. */
+-      ndfXgt0i( indf, "SMURF", "NOI_BOXSIZE", &repeat, status );
++      ndfXgt0l( indf, "SMURF", "NOI_BOXSIZE", &repeat, status );
+ 
+ /* Check we can use the pointers safely. */
+       if( *status == SAI__OK ) {
+diff --git a/applications/smurf/libsmf/smf_initial_sky.c b/applications/smurf/libsmf/smf_initial_sky.c
+index db9cf2d562..89bf690b1d 100644
+--- a/applications/smurf/libsmf/smf_initial_sky.c
++++ b/applications/smurf/libsmf/smf_initial_sky.c
+@@ -222,7 +222,7 @@ int smf_initial_sky( ThrWorkForce *wf, AstKeyMap *keymap, smfDIMMData *dat,
+          double *tptr;
+          int tndf;
+          HDSLoc *xloc = NULL;
+-         ndfXgt0i( indf1, SMURF__EXTNAME, "NUMITER", iters, status );
++         ndfXgt0l( indf1, SMURF__EXTNAME, "NUMITER", iters, status );
+ 
+ /* Get a locator for the SMURF extension. */
+          ndfXloc( indf1, SMURF__EXTNAME, "READ", &xloc, status );
+diff --git a/applications/smurf/libsmf/smf_polext.c b/applications/smurf/libsmf/smf_polext.c
+index 872a43bead..108c22684e 100644
+--- a/applications/smurf/libsmf/smf_polext.c
++++ b/applications/smurf/libsmf/smf_polext.c
+@@ -257,7 +257,7 @@ void smf_polext( int ondf, int store_angle, double angle, const char *domain,
+ /* If required, ctore the angle from the reference direction (north) to the
+    effective analyser axis, measured positive in the same sense as rotation
+    from the first to the second pixel axis. */
+-      if( store_angle ) ndfXpt0r( angle*AST__DR2D, ondf, "POLPACK", "ANLANG",
++      if( store_angle ) ndfXpt0l( angle*AST__DR2D, ondf, "POLPACK", "ANLANG",
+                                   status );
+ 
+ /* Annul the extension locator.  */
+diff --git a/applications/smurf/libsmf/smf_write_smfData.c b/applications/smurf/libsmf/smf_write_smfData.c
+index c2f6cbdcb5..40bd377a64 100644
+--- a/applications/smurf/libsmf/smf_write_smfData.c
++++ b/applications/smurf/libsmf/smf_write_smfData.c
+@@ -463,9 +463,9 @@ void smf_write_smfData ( ThrWorkForce *wf, const smfData *data, const smfData *v
+       ndfXstat( outfile->ndfid, SMURF__EXTNAME, &there, status );
+       if( !there ) ndfXnew( outfile->ndfid, SMURF__EXTNAME, SMURF__EXTTYPE,
+                             0, NULL, &xloc, status );
+-      ndfXpt0d( inhdr->steptime, outfile->ndfid, SMURF__EXTNAME,
++      ndfXpt0l( inhdr->steptime, outfile->ndfid, SMURF__EXTNAME,
+                 "STEPTIME", status );
+-      ndfXpt0d( inhdr->scanvel, outfile->ndfid, SMURF__EXTNAME,
++      ndfXpt0l( inhdr->scanvel, outfile->ndfid, SMURF__EXTNAME,
+                 "SCAN_VEL", status );
+       datAnnul( &xloc, status );
+     }
+diff --git a/applications/smurf/libsmurf/smurf_makemap.c b/applications/smurf/libsmurf/smurf_makemap.c
+index 0e3aed6225..44fc6098d5 100644
+--- a/applications/smurf/libsmurf/smurf_makemap.c
++++ b/applications/smurf/libsmurf/smurf_makemap.c
+@@ -1910,7 +1910,7 @@ void smurf_makemap( int *status ) {
+        iterations were completed. This is only useful if the data was
+        processed in a single chunk. */
+     if( iters != -1 && ncontchunks == 1 ) {
+-       ndfXpt0i( iters, ondf, SMURF__EXTNAME, "NUMITER", status );
++       ndfXpt0l( iters, ondf, SMURF__EXTNAME, "NUMITER", status );
+     }
+ 
+     /* Set bad bits mask to enable QUALITY. We can have quality bits set

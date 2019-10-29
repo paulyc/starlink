@@ -1,3 +1,4 @@
+
 /*
  *+
  *  Name:
@@ -228,7 +229,7 @@ void smf_dreamsolve( smfData *data, int *status ) {
 
     /* Write grid size into output file - PROTECT FROM NON-NULL!! */
     ofile = data->file;
-    ndfXpt0d( dream->gridstep, ofile->ndfid, "DREAM", "GRID_SIZE", status);
+    ndfXpt0l_( dream->gridstep, ofile->ndfid, "DREAM", "GRID_SIZE", status);
 
     /* Create SCU2RED extension to hold reconstructed images */
     scu2redloc = smf_get_xloc(data, "SCU2RED", "SCUBA2_MAP_ARR", "WRITE",
